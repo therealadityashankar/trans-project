@@ -48,17 +48,17 @@ body {
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-bottom: 30px;
-    gap: 20px;
+    gap: 10px;
 }
 
 .trans-flag {
-    width: 150px;
-    height: 100px;
+    width: 70px;
+    height: 44px;
     display: flex;
     flex-direction: column;
-    border-radius: 8px;
+    border-radius: 2px;
     overflow: hidden;
     flex-shrink: 0;
 }
@@ -93,6 +93,45 @@ body {
 
 .photo-placeholder span {
     font-size: 50px;
+}
+
+.pride-flag {
+    width: 70px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-left: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pride-flag .stripe {
+    flex: 1;
+}
+
+.pride-flag .stripe.red {
+    background: #e40303;
+}
+
+.pride-flag .stripe.orange {
+    background: #ff8c00;
+}
+
+.pride-flag .stripe.yellow {
+    background: #ffed00;
+}
+
+.pride-flag .stripe.green {
+    background: #008026;
+}
+
+.pride-flag .stripe.blue {
+    background: #004dff;
+}
+
+.pride-flag .stripe.purple {
+    background: #750787;
 }
 
 .content {

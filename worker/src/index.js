@@ -29,7 +29,7 @@ export default {
       );
     }
 
-    const { subject, message, replyTo, honeypot } = body;
+    const { subject, message, replyTo, honeypot, files } = body;
 
     if (honeypot) {
       return new Response(JSON.stringify({ success: true }), {
@@ -51,6 +51,7 @@ export default {
       replyTo: replyTo || env.SENDER_EMAIL,
       subject,
       text: `Submission:\n\n${message}`,
+      files: files || [],
     });
 
     await env.EMAIL.send(emailMessage);
@@ -63,15 +64,44 @@ export default {
   },
 };
 
-function createMimeMessage({ from, to, replyTo, subject, text }) {
-  const message = [
+function createMimeMessage({ from, to, replyTo, subject, text, files }) {
+  const messageId = `<${Date.now()}.${crypto.randomUUID()}@${from.split('@')[1]}>`;
+  const boundary = `----=_Part_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+
+  const headers = [
     `From: ${from}`,
     `To: ${to}`,
     `Reply-To: ${replyTo}`,
     `Subject: ${subject}`,
+    `Message-ID: ${messageId}`,
+    `Date: ${new Date().toUTCString()}`,
+    `MIME-Version: 1.0`,
+    `Content-Type: multipart/mixed; boundary="${boundary}"`,
+  ].join('\r\n');
+
+  const textPart = [
+    `--${boundary}`,
     `Content-Type: text/plain; charset=utf-8`,
+    `Content-Transfer-Encoding: 7bit`,
     '',
     text,
+  ].join('\r\n');
+
+  const attachmentParts = files.map((file) => [
+    `--${boundary}`,
+    `Content-Type: ${file.type || 'application/octet-stream'}; name="${file.name}"`,
+    `Content-Transfer-Encoding: base64`,
+    `Content-Disposition: attachment; filename="${file.name}"`,
+    '',
+    file.data,
+  ].join('\r\n')).join('\r\n');
+
+  const message = [
+    headers,
+    '',
+    textPart,
+    attachmentParts,
+    `--${boundary}--`,
   ].join('\r\n');
 
   return new EmailMessage(from, to, message);

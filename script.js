@@ -8,15 +8,35 @@ const currentLang = document.documentElement.lang;
 const form = document.getElementById('submission-form');
 const formMessage = document.getElementById('form-message');
 
+async function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve({
+            name: file.name,
+            type: file.type,
+            data: reader.result.split(',')[1]
+        });
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+    });
+}
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const submitBtn = document.getElementById('submit-btn');
     submitBtn.disabled = true;
 
+    const fileInput = document.getElementById('file-upload');
+    const files = await Promise.all(
+        Array.from(fileInput.files).map(fileToBase64)
+    );
+
     const payload = {
+        from: "anonymous",
         subject: document.getElementById('story').dataset.subject || 'Submission',
         message: document.getElementById('story').value.trim(),
+        files,
         honeypot: ''
     };
 
