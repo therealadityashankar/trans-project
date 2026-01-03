@@ -1,5 +1,5 @@
 // Placeholder URL - replace with Cloudflare Worker URL
-const SUBMISSION_URL = 'https://your-cloudflare-worker.workers.dev/submit';
+const SUBMISSION_URL = 'https://email-forwarder.theadityashankar.workers.dev';
 
 // Get current language from document
 const currentLang = document.documentElement.lang;
