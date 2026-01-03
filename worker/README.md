@@ -36,10 +36,10 @@ npm run deploy
 
 ```json
 {
-  "from": "sender@example.com",
   "subject": "Contact Form Submission",
   "message": "Hello, this is a test message.",
-  "replyTo": "optional-reply-to@example.com"
+  "replyTo": "optional-reply-to@example.com",
+  "honeypot": ""
 }
 ```
 

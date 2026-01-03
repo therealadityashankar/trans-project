@@ -13,17 +13,19 @@ form.addEventListener('submit', async (e) => {
     
     const submitBtn = document.getElementById('submit-btn');
     submitBtn.disabled = true;
-    
-    const formData = new FormData(form);
-    
-    const fileInput = document.getElementById('file-upload');
-    if (fileInput.files[0]) {
-        formData.append('file', fileInput.files[0]);
-    }
-    
+
+    const payload = {
+        subject: document.getElementById('story').dataset.subject || 'Submission',
+        message: document.getElementById('story').value.trim(),
+        honeypot: ''
+    };
+
     const response = await fetch(SUBMISSION_URL, {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
     });
     
     formMessage.classList.remove('hidden', 'success', 'error');

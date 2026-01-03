@@ -13,8 +13,23 @@ export default {
       });
     }
 
-    const body = await request.json();
-    const { from, subject, message, replyTo, honeypot } = body;
+    const body = await request
+      .json()
+      .catch(() =>
+        new Response(
+          JSON.stringify({ error: 'Request body must be valid JSON' }),
+          { status: 400, headers: corsHeaders() }
+        )
+      );
+
+    if (!body) {
+      return new Response(
+        JSON.stringify({ error: 'Request body must be valid JSON' }),
+        { status: 400, headers: corsHeaders() }
+      );
+    }
+
+    const { subject, message, replyTo, honeypot } = body;
 
     if (honeypot) {
       return new Response(JSON.stringify({ success: true }), {
@@ -23,7 +38,7 @@ export default {
       });
     }
 
-    if (!from || !subject || !message) {
+    if (!message) {
       return new Response(
         JSON.stringify({ error: 'Missing required fields: from, subject, message' }),
         { status: 400, headers: corsHeaders() }
@@ -33,9 +48,9 @@ export default {
     const emailMessage = createMimeMessage({
       from: env.SENDER_EMAIL,
       to: env.DESTINATION_EMAIL,
-      replyTo: replyTo || from,
+      replyTo: replyTo || env.SENDER_EMAIL,
       subject,
-      text: `From: ${from}\n\n${message}`,
+      text: `Submission:\n\n${message}`,
     });
 
     await env.EMAIL.send(emailMessage);
