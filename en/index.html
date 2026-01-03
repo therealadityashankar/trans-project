@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queerness & Childhood</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="language-toggle">
+        <a href="/" class="lang-btn">DE</a>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="trans-flag">
+                <div class="stripe blue"></div>
+                <div class="stripe pink"></div>
+                <div class="stripe white"></div>
+                <div class="stripe pink"></div>
+                <div class="stripe blue"></div>
+            </div>
+            <div class="photo-placeholder">
+                <span>📷</span>
+            </div>
+        </header>
+
+        <main class="content">
+                <h1>Queerness & Childhood</h1>
+                <p>Hello, I'm Lilo (they/she) and I'm collecting photos and stories on the topic of "queerness and childhood" for a documentary art exhibition that I'm presenting as part of my theater studies degree in one of my seminaries. If you have a picture of an object or an old photo, diary entries, or whatsappchats that document the exploration of (your) queerness as a child or teenager, please upload them here along with a short text!</p>
+                
+                <p>The entries will remain anonymous but will be accessible to anyone who has access to this link. In this way, beyond my exhibition a living archive of shared memories will be created. The phase of life that childhood encompasses and how it relates to queerness is deliberately left open. The questions below could be, but don't have to be an inspiration.</p>
+                
+                <p><strong>The pictures for my exhibition must be uploaded by January 17!</strong> I´m looking forward to all of your posts! Please also share the link!</p>
+                
+                <p>Since childhood is often a very vulnerable phase of life, queer children are often exposed to discrimination and abuse to a greater extent than adults. Therefore, please pay attention to how you feel while dealing with the topic and take a break if it becomes too much. If you have had difficult experiences, it can be helpful to talk to a trusted person or seek counselling / telephone support (you can find good resources for example at <a href="https://transrightsswitzerland.ch/elementor-1748/" target="_blank">transrightsswitzerland.ch</a> or <a href="https://www.berlin.de/ba-tempelhof-schoeneberg/politik-und-verwaltung/beauftragte/queere-lebensweisen/artikel.849400.php" target="_blank">berlin.de</a>).</p>
+                
+                <p>Please do not share any posts that show or trivialize overt violence. It is also important to me to emphasize that the archive is not intended to deny the queerness of people who did not start to reflect upon queerness in their childhood, nor should it give the impression that the shared content is representative of all queer experiences.</p>
+                
+                <h2>Questions for possible inspiration:</h2>
+                <ul>
+                    <li>How did you perceive queer identity as a child, whether in relation to gender or sexuality (in yourself)?</li>
+                    <li>(How) was queerness talked about in your childhood?</li>
+                    <li>Were there positive, encouraging reactions to queerness in your environment?</li>
+                    <li>Did you have role models?</li>
+                    <li>In which spaces and with which future perspectives did you feel comfortable? What caused discomfort?</li>
+                    <li>What would you have wished for differently?</li>
+                </ul>
+
+            <form id="submission-form" class="submission-form">
+                <div class="form-group">
+                    <label for="story">Your story / text</label>
+                    <textarea id="story" name="story" rows="6" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="file-upload">Upload image (optional)</label>
+                    <input type="file" id="file-upload" name="file" accept="image/*,.pdf">
+                </div>
+                
+                <input type="text" name="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
+                
+                <button type="submit" id="submit-btn">Submit</button>
+            </form>
+
+            <div id="form-message" class="form-message hidden"></div>
+        </main>
+    </div>
+
+    <script src="../script.js" data-lang="en"></script>
+</body>
+</html>

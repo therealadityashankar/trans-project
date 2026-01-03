@@ -1,0 +1,10 @@
+name = "email-forwarder"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# Set these as secrets via:
+# wrangler secret put SENDER_EMAIL
+# wrangler secret put DESTINATION_EMAIL
+
+[[send_email]]
+name = "EMAIL"

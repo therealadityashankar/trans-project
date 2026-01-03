@@ -1,0 +1,256 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+    min-height: 100vh;
+    line-height: 1.6;
+    color: #333;
+}
+
+.language-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 5px;
+}
+
+.lang-btn {
+    padding: 10px 20px;
+    border: 2px solid #5bcefa;
+    background: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #333;
+}
+
+.lang-btn:hover {
+    background: #f5a9b8;
+    color: white;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.trans-flag {
+    width: 150px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.stripe {
+    flex: 1;
+}
+
+.stripe.blue {
+    background: #5bcefa;
+}
+
+.stripe.pink {
+    background: #f5a9b8;
+}
+
+.stripe.white {
+    background: #ffffff;
+}
+
+.photo-placeholder {
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #f5a9b8;
+    flex-shrink: 0;
+}
+
+.photo-placeholder span {
+    font-size: 50px;
+}
+
+.content {
+    background: transparent;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+    font-size: 2rem;
+    font-family: 'The Girl Next Door', cursive;
+}
+
+h2 {
+    color: #000;
+    margin: 30px 0 15px;
+    font-size: 1.3rem;
+    font-family: 'The Girl Next Door', cursive;
+}
+
+p {
+    margin-bottom: 15px;
+    text-align: justify;
+    color: #333;
+}
+
+ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a {
+    color: #0066cc;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #004499;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.submission-form {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #f5a9b8;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #5bcefa;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #f5a9b8;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 16px;
+    resize: vertical;
+    transition: border-color 0.3s;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #5bcefa;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px dashed #f5a9b8;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    cursor: pointer;
+}
+
+input[type="file"]:hover {
+    border-color: #5bcefa;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #5bcefa, #f5a9b8);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+.form-message {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px 15px;
+    }
+    
+    .content {
+        padding: 25px 20px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .language-toggle {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .lang-btn {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+}
