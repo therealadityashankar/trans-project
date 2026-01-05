@@ -1,9 +1,18 @@
 import { EmailMessage } from 'cloudflare:email';
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') {
       return handleCORS();
+    }
+
+    const url = new URL(request.url);
+
+    if (request.method === 'GET' && url.pathname === '/responses') {
+      const stub = env.RESPONSES.get(env.RESPONSES.idFromName('default'));
+      const res = await stub.fetch('https://responses/list', { method: 'GET' });
+      const body = await res.text();
+      return new Response(body, { status: res.status, headers: corsHeaders() });
     }
 
     if (request.method !== 'POST') {
@@ -13,23 +22,25 @@ export default {
       });
     }
 
-    const body = await request
-      .json()
-      .catch(() =>
-        new Response(
-          JSON.stringify({ error: 'Request body must be valid JSON' }),
-          { status: 400, headers: corsHeaders() }
-        )
-      );
-
-    if (!body) {
-      return new Response(
-        JSON.stringify({ error: 'Request body must be valid JSON' }),
-        { status: 400, headers: corsHeaders() }
-      );
+    if (!request.headers.get('content-type')?.includes('application/json')) {
+      return new Response(JSON.stringify({ error: 'Content-Type must be application/json' }), {
+        status: 400,
+        headers: corsHeaders(),
+      });
     }
 
-    const { subject, message, replyTo, honeypot, files } = body;
+    const raw = await request.text();
+    let body;
+    try {
+      body = JSON.parse(raw);
+    } catch {
+      return new Response(JSON.stringify({ error: 'Request body must be valid JSON' }), {
+        status: 400,
+        headers: corsHeaders(),
+      });
+    }
+
+    const { subject, message, replyTo, honeypot, files, lang } = body;
 
     if (honeypot) {
       return new Response(JSON.stringify({ success: true }), {
@@ -45,13 +56,30 @@ export default {
       );
     }
 
+    const createdAt = Date.now();
+    const safeFiles = Array.isArray(files) ? files.slice(0, 10) : [];
+
+    const stub = env.RESPONSES.get(env.RESPONSES.idFromName('default'));
+    ctx.waitUntil(
+      stub.fetch('https://responses/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          createdAt,
+          message,
+          files: safeFiles,
+          lang: lang === 'en' ? 'en' : 'de',
+        }),
+      })
+    );
+
     const emailMessage = createMimeMessage({
       from: env.SENDER_EMAIL,
       to: env.DESTINATION_EMAIL,
       replyTo: replyTo || env.SENDER_EMAIL,
       subject,
       text: `Submission:\n\n${message}`,
-      files: files || [],
+      files: safeFiles,
     });
 
     await env.EMAIL.send(emailMessage);
@@ -118,4 +146,45 @@ function corsHeaders() {
 
 function handleCORS() {
   return new Response(null, { status: 204, headers: corsHeaders() });
+}
+
+export class ResponsesStore {
+  constructor(state) {
+    this.state = state;
+  }
+
+  async fetch(request) {
+    const url = new URL(request.url);
+
+    if (request.method === 'GET' && url.pathname === '/list') {
+      const items = (await this.state.storage.get('items')) || [];
+      return new Response(JSON.stringify({ items }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    if (request.method === 'POST' && url.pathname === '/add') {
+      const raw = await request.text();
+      let body;
+      try {
+        body = JSON.parse(raw);
+      } catch {
+        return new Response(JSON.stringify({ error: 'Invalid JSON' }), {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+
+      const items = (await this.state.storage.get('items')) || [];
+      items.unshift(body);
+      await this.state.storage.put('items', items.slice(0, 100));
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    return new Response('Not found', { status: 404 });
+  }
 }
