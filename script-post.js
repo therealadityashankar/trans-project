@@ -39,6 +39,12 @@ function applyLang(lang) {
 const form = document.getElementById('submission-form');
 const formMessage = document.getElementById('form-message');
 
+function escapeHtml(input) {
+    const div = document.createElement('div');
+    div.textContent = input;
+    return div.innerHTML;
+}
+
 async function fileToBase64(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -72,37 +78,66 @@ form.addEventListener('submit', async (e) => {
         lang: getLang()
     };
 
-    const response = await fetch(SUBMISSION_URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    });
-    
-    formMessage.classList.remove('hidden', 'success', 'error');
-    
-    if (response.ok) {
-        formMessage.classList.add('success');
-        formMessage.textContent = getLang() === 'de' 
-            ? 'Vielen Dank für deine Einsendung!' 
-            : 'Thank you for your submission!';
-        form.reset();
+    // Show loading state
+    formMessage.classList.remove('hidden', 'success', 'error', 'loading');
+    formMessage.classList.add('loading');
+    formMessage.innerHTML = getLang() === 'de' 
+        ? '<div class="spinner"></div><p>Deine Einsendung wird hochgeladen…</p>'
+        : '<div class="spinner"></div><p>Uploading your submission…</p>';
+    form.style.display = 'none';
 
-        // Redirect to responses page
-        setTimeout(() => {
-            const next = new URLSearchParams(window.location.search);
-            next.delete('lang');
-            window.location.href = `index.html?lang=${getLang()}`;
-        }, 2000);
-    } else {
+    try {
+        const response = await fetch(SUBMISSION_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        const data = await response.json();
+        
+        formMessage.classList.remove('loading');
+        
+        if (response.ok || response.status === 202) {
+            // Success or partial success
+            formMessage.classList.add('success');
+            const lang = getLang();
+            const responseLink = `index.html?lang=${lang}`;
+            
+            if (response.status === 202) {
+                formMessage.innerHTML = getLang() === 'de' 
+                    ? `<p>Deine Einsendung wurde empfangen, aber es gab ein Problem beim Speichern. Sie wird möglicherweise nicht sofort angezeigt.</p><a href="${responseLink}" class="response-link">${getLang() === 'de' ? 'Zu den Einsendungen' : 'View submissions'}</a>`
+                    : `<p>Your submission was received but there was an issue saving it. It may not appear immediately.</p><a href="${responseLink}" class="response-link">View submissions</a>`;
+            } else {
+                formMessage.innerHTML = getLang() === 'de' 
+                    ? `<p>Vielen Dank für deine Einsendung!</p><a href="${responseLink}" class="response-link">Zu den Einsendungen</a>`
+                    : `<p>Thank you for your submission!</p><a href="${responseLink}" class="response-link">View submissions</a>`;
+            }
+        } else {
+            formMessage.classList.add('error');
+            const errorMsg = data.error || 'Unknown error';
+            const details = data.details ? `<small>${data.details}</small>` : '';
+            formMessage.innerHTML = `<p>${getLang() === 'de' ? 'Es gab einen Fehler: ' : 'There was an error: '}</p><p>${escapeHtml(errorMsg)}</p>${details}<button type="button" class="retry-btn">${getLang() === 'de' ? 'Erneut versuchen' : 'Try again'}</button>`;
+            
+            // Reset form on retry
+            document.querySelector('.retry-btn').addEventListener('click', () => {
+                formMessage.classList.add('hidden');
+                form.style.display = '';
+                submitBtn.disabled = false;
+            });
+        }
+    } catch (error) {
+        formMessage.classList.remove('loading');
         formMessage.classList.add('error');
-        formMessage.textContent = getLang() === 'de'
-            ? 'Es gab einen Fehler. Bitte versuche es erneut.'
-            : 'There was an error. Please try again.';
+        formMessage.innerHTML = `<p>${getLang() === 'de' ? 'Netzwerkfehler: ' : 'Network error: '}</p><p>${escapeHtml(error.message)}</p><button type="button" class="retry-btn">${getLang() === 'de' ? 'Erneut versuchen' : 'Try again'}</button>`;
+        
+        document.querySelector('.retry-btn').addEventListener('click', () => {
+            formMessage.classList.add('hidden');
+            form.style.display = '';
+            submitBtn.disabled = false;
+        });
     }
-    
-    submitBtn.disabled = false;
 });
 
 // Initial state
