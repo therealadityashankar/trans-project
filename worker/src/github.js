@@ -36,17 +36,17 @@ export async function getResponses(env) {
       throw new Error('Expected array response from GitHub API');
     }
 
-    // Filter for directories and parse response IDs
-    const responseIds = items
-      .filter((item) => item.type === 'dir' && /^\d+$/.test(item.name))
-      .map((item) => parseInt(item.name, 10))
-      .sort((a, b) => b - a); // Sort descending (newest first)
+    // Filter for directories and sort by timestamp descending (newest first)
+    const responseTimestamps = items
+      .filter((item) => item.type === 'dir')
+      .map((item) => item.name)
+      .sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
 
     // Fetch details for each response
     const responses = [];
-    for (const id of responseIds) {
+    for (const timestamp of responseTimestamps) {
       try {
-        const dirUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${id}`;
+        const dirUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${timestamp}`;
         const dirResp = await fetch(dirUrl, { headers });
 
         if (!dirResp.ok) continue;
@@ -64,7 +64,7 @@ export async function getResponses(env) {
               message = await mdResp.text();
             }
           } catch (e) {
-            console.error(`Failed to fetch response.md for ${id}:`, e);
+            console.error(`Failed to fetch response.md for ${timestamp}:`, e);
           }
         }
 
@@ -73,7 +73,7 @@ export async function getResponses(env) {
           .filter((item) => item.type === 'file' && /^image\d+\.(jpg|jpeg|png|gif|webp)$/i.test(item.name))
           .map((item) => ({
             name: item.name,
-            path: `responses/${id}/${item.name}`,
+            path: `responses/${timestamp}/${item.name}`,
             downloadUrl: item.download_url,
           }))
           .sort((a, b) => {
@@ -84,13 +84,13 @@ export async function getResponses(env) {
           });
 
         responses.push({
-          id,
+          id: timestamp,
           message: message.trim(),
           images: images.map((img) => img.downloadUrl),
-          createdAt: new Date().toISOString(),
+          createdAt: new Date(parseInt(timestamp, 10) * 1000).toISOString(),
         });
       } catch (e) {
-        console.error(`Failed to fetch response ${id}:`, e);
+        console.error(`Failed to fetch response ${timestamp}:`, e);
         continue;
       }
     }
@@ -117,77 +117,17 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
   };
 
   try {
-    // Get current meta.json
-    const metaUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/meta.json`;
-    const metaResp = await fetch(metaUrl, {
-      headers,
-    });
-
-    let meta = { count: 0, responses: [] };
-    let sha = null;
-
-    if (metaResp.ok) {
-      const data = await metaResp.json();
-      sha = data.sha;
-      meta = JSON.parse(atob(data.content));
-    } else if (metaResp.status !== 404) {
-      const text = await metaResp.text();
-      let errorMsg = text;
-      try {
-        const error = JSON.parse(text);
-        errorMsg = error.message || error.error || text;
-      } catch (e) {
-        // Response wasn't JSON, use raw text
-      }
-      throw new Error(`GitHub API error (${metaResp.status}): ${errorMsg}`);
-    }
-
-    const nextId = meta.count + 1;
-    const imageNames = files
-      .filter((f) => (f.type || '').startsWith('image/'))
-      .map((f, i) => {
-        const ext = f.type.split('/')[1];
-        return `image${i + 1}.${ext}`;
-      });
-
-    meta.count = nextId;
-    meta.responses.push({
-      id: nextId,
-      images: imageNames,
-    });
-
-    // Update meta.json
-    const metaUpdateResp = await fetch(metaUrl, {
-      method: 'PUT',
-      headers,
-      body: JSON.stringify({
-        message: `Add response ${nextId}`,
-        content: btoa(JSON.stringify(meta, null, 2)),
-        sha,
-      }),
-    });
-
-    if (!metaUpdateResp.ok) {
-      const text = await metaUpdateResp.text();
-      let errorMsg = text;
-      try {
-        const error = JSON.parse(text);
-        errorMsg = error.message || error.error || text;
-      } catch (e) {
-        // Response wasn't JSON, use raw text
-      }
-      throw new Error(`Failed to update meta.json (${metaUpdateResp.status}): ${errorMsg}`);
-    }
+    const timestamp = Math.floor(Date.now() / 1000).toString();
 
     // Add response.md file
-    const mdContent = `${message}\n\n_Submitted: ${new Date(createdAt).toLocaleString()}_`;
+    const mdContent = message;
     const mdResp = await fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${nextId}/response.md`,
+      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${timestamp}/response.md`,
       {
         method: 'PUT',
         headers,
         body: JSON.stringify({
-          message: `Add response ${nextId}`,
+          message: `Add response ${timestamp}`,
           content: btoa(mdContent),
         }),
       }
@@ -214,12 +154,12 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
       const fileName = `image${i + 1}.${ext}`;
 
       const imgResp = await fetch(
-        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${nextId}/${fileName}`,
+        `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${timestamp}/${fileName}`,
         {
           method: 'PUT',
           headers,
           body: JSON.stringify({
-            message: `Add response ${nextId}`,
+            message: `Add response ${timestamp}`,
             content: file.data,
           }),
         }
