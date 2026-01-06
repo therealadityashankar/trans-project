@@ -1,0 +1,12 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e40303;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff8c00;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#grad4)"/>
+  <path d="M 200 50 Q 300 100 250 200 Q 200 250 100 200 Q 50 100 200 50" fill="#ffffff" opacity="0.3"/>
+  <circle cx="200" cy="120" r="25" fill="#ffffff" opacity="0.4"/>
+  <text x="200" y="260" font-size="16" text-anchor="middle" fill="#ffffff" font-weight="bold">Reflection</text>
+</svg>

@@ -1,0 +1,17 @@
+{
+  "count": 3,
+  "responses": [
+    {
+      "id": 1,
+      "images": ["image1.jpg"]
+    },
+    {
+      "id": 2,
+      "images": ["image1.jpg", "image2.jpg"]
+    },
+    {
+      "id": 3,
+      "images": ["image1.jpg"]
+    }
+  ]
+}
