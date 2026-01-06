@@ -1,3 +1,7 @@
+// Cloudflare Worker URL
+const SUBMISSION_URL = 'https://email-forwarder.theadityashankar.workers.dev';
+const RESPONSES_URL = `${SUBMISSION_URL}/responses`;
+
 const params = new URLSearchParams(window.location.search);
 
 function getLang() {
@@ -44,12 +48,12 @@ function renderFeed(items) {
     feedList.innerHTML = items
         .map((item, index) => {
             const created = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
-            const imageUrl = item.images && item.images[0] ? item.images[0] : null;
+            const firstImage = item.images && item.images[0] ? item.images[0] : null;
             const text = (item.message || '').substring(0, 150);
 
             return `
 <div class="feed-card" data-index="${index}" data-item='${JSON.stringify(item).replace(/'/g, "&apos;")}'>
-    ${imageUrl ? `<img class="card-image" src="${imageUrl}" alt="">` : '<div class="card-image"></div>'}
+    ${firstImage ? `<img class="card-image" src="${firstImage}" alt="">` : '<div class="card-image"></div>'}
     <div class="card-content">
         <div class="card-meta">${escapeHtml(created)}</div>
         <div class="card-text">${escapeHtml(text)}</div>
@@ -97,32 +101,14 @@ async function loadResponses() {
     feedList.innerHTML = `<div class="response-loading">${getLang() === 'de' ? 'Lade…' : 'Loading…'}</div>`;
 
     try {
-        const metaResp = await fetch('responses/meta.json');
-        if (!metaResp.ok) {
+        const resp = await fetch(RESPONSES_URL);
+        if (!resp.ok) {
             feedList.innerHTML = `<div class="response-empty">${getLang() === 'de' ? 'Konnte Einsendungen nicht laden.' : 'Could not load responses.'}</div>`;
             return;
         }
 
-        const meta = await metaResp.json();
-        const items = [];
-
-        for (const responseData of meta.responses) {
-            const id = responseData.id;
-            const mdResp = await fetch(`responses/${id}/response.md`);
-            if (!mdResp.ok) continue;
-
-            const message = await mdResp.text();
-            const images = responseData.images.map((img) => `responses/${id}/${img}`);
-
-            items.push({
-                id,
-                message: message.trim(),
-                images,
-                createdAt: new Date().toISOString()
-            });
-        }
-
-        renderFeed(items.reverse());
+        const data = await resp.json();
+        renderFeed(Array.isArray(data.items) ? data.items : []);
     } catch (e) {
         console.error('Error loading responses:', e);
         feedList.innerHTML = `<div class="response-empty">${getLang() === 'de' ? 'Konnte Einsendungen nicht laden.' : 'Could not load responses.'}</div>`;

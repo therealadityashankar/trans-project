@@ -1,10 +1,36 @@
 import { sendEmail } from './email.js';
-import { updateGithub } from './github.js';
+import { updateGithub, getResponses } from './github.js';
 
 export default {
   async fetch(request, env, ctx) {
     if (request.method === 'OPTIONS') {
       return handleCORS();
+    }
+
+    const url = new URL(request.url);
+
+    // GET /responses - List all responses from GitHub
+    if (request.method === 'GET' && url.pathname === '/responses') {
+      try {
+        const data = await getResponses(env);
+        return new Response(JSON.stringify(data), {
+          status: 200,
+          headers: corsHeaders(),
+        });
+      } catch (error) {
+        console.error('Error fetching responses:', error);
+        return new Response(
+          JSON.stringify({
+            success: false,
+            error: 'Failed to fetch responses',
+            details: error.message,
+          }),
+          {
+            status: 500,
+            headers: corsHeaders(),
+          }
+        );
+      }
     }
 
     if (request.method !== 'POST') {

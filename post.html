@@ -16,14 +16,18 @@
 
     <div class="app">
         <aside class="sidebar">
-            <a href="index.html" class="sidebar-link" id="nav-all">
-                <span class="sidebar-icon">📖</span>
-                <span>All responses</span>
-            </a>
-            <a href="post.html" class="sidebar-link active" id="nav-post">
-                <span class="sidebar-icon">✍️</span>
-                <span>Post your response</span>
-            </a>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="sidebar-link" id="nav-all">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/outline/chat-bubble-bottom-center-text.svg" alt="Chat" class="sidebar-icon sidebar-icon-outline">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/solid/chat-bubble-bottom-center-text.svg" alt="Chat" class="sidebar-icon sidebar-icon-filled hidden">
+                    <span>All responses</span>
+                </a>
+                <a href="post.html" class="sidebar-link active" id="nav-post">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/outline/pencil-square.svg" alt="Edit" class="sidebar-icon sidebar-icon-outline">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/solid/pencil-square.svg" alt="Edit" class="sidebar-icon sidebar-icon-filled hidden">
+                    <span>Post your response</span>
+                </a>
+            </nav>
         </aside>
 
         <div class="container">
