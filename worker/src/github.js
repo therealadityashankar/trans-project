@@ -25,8 +25,15 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
       sha = data.sha;
       meta = JSON.parse(atob(data.content));
     } else if (metaResp.status !== 404) {
-      const error = await metaResp.json();
-      throw new Error(`GitHub API error (${metaResp.status}): ${error.message || 'Unknown error'}`);
+      const text = await metaResp.text();
+      let errorMsg = text;
+      try {
+        const error = JSON.parse(text);
+        errorMsg = error.message || error.error || text;
+      } catch (e) {
+        // Response wasn't JSON, use raw text
+      }
+      throw new Error(`GitHub API error (${metaResp.status}): ${errorMsg}`);
     }
 
     const nextId = meta.count + 1;
@@ -58,8 +65,15 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
     });
 
     if (!metaUpdateResp.ok) {
-      const error = await metaUpdateResp.json();
-      throw new Error(`Failed to update meta.json (${metaUpdateResp.status}): ${error.message || 'Unknown error'}`);
+      const text = await metaUpdateResp.text();
+      let errorMsg = text;
+      try {
+        const error = JSON.parse(text);
+        errorMsg = error.message || error.error || text;
+      } catch (e) {
+        // Response wasn't JSON, use raw text
+      }
+      throw new Error(`Failed to update meta.json (${metaUpdateResp.status}): ${errorMsg}`);
     }
 
     // Add response.md file
@@ -80,8 +94,15 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
     );
 
     if (!mdResp.ok) {
-      const error = await mdResp.json();
-      throw new Error(`Failed to create response.md (${mdResp.status}): ${error.message || 'Unknown error'}`);
+      const text = await mdResp.text();
+      let errorMsg = text;
+      try {
+        const error = JSON.parse(text);
+        errorMsg = error.message || error.error || text;
+      } catch (e) {
+        // Response wasn't JSON, use raw text
+      }
+      throw new Error(`Failed to create response.md (${mdResp.status}): ${errorMsg}`);
     }
 
     // Add image files
@@ -108,8 +129,15 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
       );
 
       if (!imgResp.ok) {
-        const error = await imgResp.json();
-        throw new Error(`Failed to upload image ${fileName} (${imgResp.status}): ${error.message || 'Unknown error'}`);
+        const text = await imgResp.text();
+        let errorMsg = text;
+        try {
+          const error = JSON.parse(text);
+          errorMsg = error.message || error.error || text;
+        } catch (e) {
+          // Response wasn't JSON, use raw text
+        }
+        throw new Error(`Failed to upload image ${fileName} (${imgResp.status}): ${errorMsg}`);
       }
     }
   } catch (error) {
