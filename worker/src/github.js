@@ -7,14 +7,17 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
     throw new Error('GitHub configuration missing: GITHUB_TOKEN, GITHUB_REPO, or GITHUB_OWNER not set');
   }
 
+  const headers = {
+    'Authorization': `token ${GITHUB_TOKEN}`,
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'Cloudflare-Worker',
+  };
+
   try {
     // Get current meta.json
     const metaUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/meta.json`;
     const metaResp = await fetch(metaUrl, {
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-      },
+      headers,
     });
 
     let meta = { count: 0, responses: [] };
@@ -53,10 +56,7 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
     // Update meta.json
     const metaUpdateResp = await fetch(metaUrl, {
       method: 'PUT',
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Accept': 'application/vnd.github.v3+json',
-      },
+      headers,
       body: JSON.stringify({
         message: `Add response ${nextId}`,
         content: btoa(JSON.stringify(meta, null, 2)),
@@ -82,10 +82,7 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${nextId}/response.md`,
       {
         method: 'PUT',
-        headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
-        },
+        headers,
         body: JSON.stringify({
           message: `Add response ${nextId}`,
           content: btoa(mdContent),
@@ -117,10 +114,7 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
         `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${nextId}/${fileName}`,
         {
           method: 'PUT',
-          headers: {
-            'Authorization': `token ${GITHUB_TOKEN}`,
-            'Accept': 'application/vnd.github.v3+json',
-          },
+          headers,
           body: JSON.stringify({
             message: `Add response ${nextId}`,
             content: file.data,
