@@ -118,6 +118,7 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
 
   try {
     const timestamp = Math.floor(Date.now() / 1000).toString();
+    const imageUrls = [];
 
     // Add response.md file
     const mdContent = message;
@@ -176,7 +177,11 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
         }
         throw new Error(`Failed to upload image ${fileName} (${imgResp.status}): ${errorMsg}`);
       }
+
+      imageUrls.push(`https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${GITHUB_REPO}@main/responses/${timestamp}/${fileName}`);
     }
+
+    return { timestamp, imageUrls };
   } catch (error) {
     throw new Error(`GitHub update failed: ${error.message}`);
   }

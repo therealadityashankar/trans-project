@@ -74,70 +74,30 @@ export default {
       );
     }
 
-    const createdAt = Date.now();
     const safeFiles = Array.isArray(files) ? files.slice(0, 10) : [];
 
     try {
-      // Run both email and GitHub update in parallel
-      const results = await Promise.allSettled([
-        sendEmail(env, {
+      // First, commit to GitHub
+      const { imageUrls } = await updateGithub(env, {
+        message,
+        files: safeFiles,
+        lang: lang === 'en' ? 'en' : 'de',
+      });
+
+      // Then send email with jsdelivr URLs
+      try {
+        await sendEmail(env, {
           subject: subject || 'New Submission',
           message,
           replyTo,
-          files: safeFiles,
-        }),
-        updateGithub(env, {
-          message,
-          files: safeFiles,
-          lang: lang === 'en' ? 'en' : 'de',
-          createdAt,
-        }),
-      ]);
-
-      const emailResult = results[0];
-      const githubResult = results[1];
-      const emailSuccess = emailResult.status === 'fulfilled';
-      const githubSuccess = githubResult.status === 'fulfilled';
-
-      // Log results for debugging
-      if (!emailSuccess) {
-        console.error('Email send failed:', emailResult.reason);
-      }
-      if (!githubSuccess) {
-        console.error('GitHub update failed:', githubResult.reason);
-      }
-
-      // If both failed, return error
-      if (!emailSuccess && !githubSuccess) {
-        return new Response(
-          JSON.stringify({
-            success: false,
-            error: 'Failed to process submission',
-            details: 'Both email notification and GitHub update failed. Please try again later.',
-          }),
-          {
-            status: 500,
-            headers: corsHeaders(),
-          }
-        );
-      }
-
-      // If only one failed, return partial success with warning
-      if (!emailSuccess || !githubSuccess) {
-        const failures = [];
-        if (!emailSuccess) failures.push('email notification');
-        if (!githubSuccess) failures.push('GitHub update');
-
-        ctx.waitUntil(
-          Promise.resolve().then(() => {
-            console.warn(`Partial failure for submission: ${failures.join(', ')}`);
-          })
-        );
-
+          imageUrls,
+        });
+      } catch (emailError) {
+        console.error('Email send failed:', emailError);
         return new Response(
           JSON.stringify({
             success: true,
-            warning: `Submission received but ${failures.join(' and ')} failed. Your submission may not appear immediately.`,
+            warning: 'Submission saved but email notification failed.',
           }),
           {
             status: 202,
@@ -146,17 +106,16 @@ export default {
         );
       }
 
-      // Both succeeded
       return new Response(JSON.stringify({ success: true }), {
         status: 200,
         headers: corsHeaders(),
       });
     } catch (error) {
-      console.error('Unexpected error processing submission:', error);
+      console.error('GitHub update failed:', error);
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Unexpected error processing submission',
+          error: 'Failed to save submission',
           details: error.message,
         }),
         {
