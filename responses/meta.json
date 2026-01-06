@@ -1,5 +1,5 @@
 {
-  "count": 6,
+  "count": 7,
   "responses": [
     {
       "id": 1,
@@ -32,6 +32,12 @@
     },
     {
       "id": 6,
+      "images": [
+        "image1.jpeg"
+      ]
+    },
+    {
+      "id": 7,
       "images": [
         "image1.jpeg"
       ]
