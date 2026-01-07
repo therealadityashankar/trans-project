@@ -56,8 +56,15 @@
                 <section class="feed">
                     <div id="responses-list" class="feed-list"></div>
                     <div id="response-detail" class="response-detail hidden">
-                        <button class="detail-close" id="close-detail">✕</button>
-                        <div id="detail-content"></div>
+                        <div class="detail-container">
+                            <button class="detail-back detail-back-desktop" id="close-detail-desktop">
+                                <span>←</span> <span data-lang="de">Alle Antworten</span><span data-lang="en" hidden>All responses</span>
+                            </button>
+                            <div id="detail-content"></div>
+                            <button class="detail-back detail-back-mobile" id="close-detail-mobile">
+                                <span>←</span> <span data-lang="de">Alle Antworten</span><span data-lang="en" hidden>All responses</span>
+                            </button>
+                        </div>
                     </div>
                 </section>
             </main>

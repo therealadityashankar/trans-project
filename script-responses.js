@@ -29,7 +29,8 @@ function applyLang(lang) {
 const feedList = document.getElementById('responses-list');
 const responseDetail = document.getElementById('response-detail');
 const detailContent = document.getElementById('detail-content');
-const closeDetailBtn = document.getElementById('close-detail');
+const closeDetailDesktop = document.getElementById('close-detail-desktop');
+const closeDetailMobile = document.getElementById('close-detail-mobile');
 
 function escapeHtml(input) {
     const div = document.createElement('div');
@@ -115,8 +116,9 @@ async function loadResponses() {
     }
 }
 
-// Close detail when clicking close button or outside
-closeDetailBtn.addEventListener('click', closeDetail);
+// Close detail when clicking close buttons or outside
+closeDetailDesktop.addEventListener('click', closeDetail);
+closeDetailMobile.addEventListener('click', closeDetail);
 responseDetail.addEventListener('click', (e) => {
     if (e.target === responseDetail) {
         closeDetail();
