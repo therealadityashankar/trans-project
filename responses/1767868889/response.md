@@ -1,0 +1,4 @@
+Das sind mein Bruder und ich. Seit meiner Geburt sind wir ein Herz und eine Seele. Es überrascht also kaum, dass er lange vor mir erkannt hat, dass ich nicht hetero bin. Mein ganzes Leben über hat er immer gesagt: „Du wirst irgendwann mit einer Frau nach Hause kommen.“
+Und tatsächlich mit 20 habe ich meine Partnerin kennengelernt.
+Durch meinen Bruder war mein Coming-out viel weniger beängstigend. Natürlich haben manche Menschen blöd reagiert, aber er war immer da, um mich aufzufangen und auch einigen anderen (aka meiner Oma) eine klare Ansage zu machen.
+Wenn ich heute an Queerness in meiner Kindheit denke, dann erinnere ich mich vor allem an diese Momente.
