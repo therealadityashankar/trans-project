@@ -37,9 +37,11 @@ function applyLang(lang) {
     // Update sidebar links to preserve language
     const navAll = document.getElementById('nav-all');
     const navPost = document.getElementById('nav-post');
+    const headerNavBtn = document.getElementById('header-nav-btn');
     const langParam = lang === 'de' ? '' : '?lang=en';
     if (navAll) navAll.href = `index.html${langParam}`;
     if (navPost) navPost.href = `post.html${langParam}`;
+    if (headerNavBtn) headerNavBtn.href = `index.html${langParam}`;
 }
 
 // Form submission
