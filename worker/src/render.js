@@ -8,16 +8,16 @@ export function escapeHtml(str) {
 }
 
 export function renderFeedCard(item) {
-  const created = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
   const firstImage = item.images && item.images[0] ? item.images[0] : null;
-  const text = (item.message || '').substring(0, 150);
+  const message = item.message || '';
+  const text = message.length > 150 ? message.substring(0, message.lastIndexOf(' ', 150)) + '...' : message;
   const itemJson = JSON.stringify(item).replace(/'/g, '&apos;');
 
   return `
-<div class="feed-card" data-item='${itemJson}'>
+<div class="feed-card" data-item='${itemJson}' data-timestamp='${item.createdAt || ''}'>
     ${firstImage ? `<img class="card-image" src="${escapeHtml(firstImage)}" alt="">` : '<div class="card-image"></div>'}
     <div class="card-content">
-        <div class="card-meta">${escapeHtml(created)}</div>
+        <div class="card-meta card-meta-timestamp"></div>
         <div class="card-text">${escapeHtml(text)}</div>
     </div>
 </div>`;

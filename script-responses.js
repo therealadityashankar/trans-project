@@ -56,8 +56,24 @@ function closeDetail() {
     responseDetail.classList.add('hidden');
 }
 
+function formatTimestamp(isoString) {
+    if (!isoString) return '';
+    try {
+        return new Date(isoString).toLocaleString();
+    } catch (e) {
+        return '';
+    }
+}
+
 function setupCardClickHandlers() {
     document.querySelectorAll('.feed-card').forEach((card) => {
+        // Render timestamp in user's local timezone
+        const timestampEl = card.querySelector('.card-meta-timestamp');
+        const timestamp = card.dataset.timestamp;
+        if (timestampEl && timestamp) {
+            timestampEl.textContent = formatTimestamp(timestamp);
+        }
+        
         card.addEventListener('click', () => {
             try {
                 const itemData = JSON.parse(card.dataset.item.replace(/&apos;/g, "'"));
