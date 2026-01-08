@@ -67,10 +67,27 @@ body {
     height: 18px;
     flex-shrink: 0;
     color: #000;
+    font-size: 18px;
+}
+
+ion-icon.sidebar-icon {
+    visibility: hidden;
+}
+
+ion-icon.sidebar-icon.hydrated {
+    visibility: visible;
 }
 
 .sidebar-link:hover {
     background: rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-link .sidebar-icon-filled {
+    display: none;
+}
+
+.sidebar-link .sidebar-icon-outline {
+    display: block;
 }
 
 .sidebar-link.active .sidebar-icon-outline {
@@ -78,7 +95,7 @@ body {
 }
 
 .sidebar-link.active .sidebar-icon-filled {
-    display: block !important;
+    display: block;
 }
 
 .language-toggle {
@@ -323,20 +340,13 @@ body {
     background: #ffffff;
 }
 
-.photo-placeholder {
-    width: 120px;
-    height: 120px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 3px solid #f5a9b8;
-    flex-shrink: 0;
-}
-
-.photo-placeholder span {
-    font-size: 50px;
+.header-title {
+    font-family: 'Reenie Beanie', cursive;
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+    text-align: center;
 }
 
 .pride-flag {
