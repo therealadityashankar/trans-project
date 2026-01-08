@@ -33,6 +33,13 @@ function applyLang(lang) {
         langToggle.href = `?${next.toString()}`;
         langToggle.textContent = nextLang.toUpperCase();
     }
+
+    // Update sidebar links to preserve language
+    const navAll = document.getElementById('nav-all');
+    const navPost = document.getElementById('nav-post');
+    const langParam = lang === 'de' ? '' : '?lang=en';
+    if (navAll) navAll.href = `index.html${langParam}`;
+    if (navPost) navPost.href = `post.html${langParam}`;
 }
 
 // Form submission
