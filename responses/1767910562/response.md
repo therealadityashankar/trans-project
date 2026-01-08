@@ -1,0 +1,6 @@
+Ich war damals in der 6. Klasse mit einer guten Freundin „verlobt“. Alle in der Klasse wussten davon und wir wollten damals dann auch „Hochzeit“ feiern. Diese Freundin entwickelte sich im laufe der Schulzeit zu einer queeren Ikone. Ich bewundere sie sehr und kenne bis heute keinen Menschen, der so viel Wertschätzung und Verständnis für seine Mitmenschen zeigt, wie sie. Hatte sie in der 5. Klasse noch „mädchentypische“ lange Haare, wurden diese mit der Zeit kurz und knall pink. Sie lebte ihre Queerness schon immer laut und war damit schon immer ein Vorbild für mich. 
+Heute sind wir noch enger befreundet als damals und ich habe durch sie angefangen meine eigene Identität und Sexualität zu hinterfragen. Etwas, was ich ohne sie wahrscheinlich nie getan hätte, da ich aus einem sehr konservativen Haushalt komme. Gerade deswegen bin ich so dankbar für alle Menschen, die die Möglichkeit besitzen offen zu zeigen wer sie sind. Unabhängig von Labels oder Schubladen, in die wir gerne gesteckt werden. 
+Ich bin wahnsinnig glücklich mit solch tollen Menschen befreundet sein zu dürfen, die mir Tag für Tag zeigen: 
+Wir sind hier, 
+Wir sind echt, 
+Und vor allem sind wir genau SO wertvoll, wie wir sind <3
