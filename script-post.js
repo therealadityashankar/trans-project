@@ -111,8 +111,8 @@ form.addEventListener('submit', async (e) => {
                     : `<p>Your submission was received but there was an issue saving it. It may not appear immediately.</p><a href="${responseLink}" class="response-link">View submissions</a>`;
             } else {
                 formMessage.innerHTML = getLang() === 'de' 
-                    ? `<p>Vielen Dank für deine Einsendung!</p><a href="${responseLink}" class="response-link">Zu den Einsendungen</a>`
-                    : `<p>Thank you for your submission!</p><a href="${responseLink}" class="response-link">View submissions</a>`;
+                    ? `<p>Vielen Dank für deine Einsendung!</p><p><small>Aufgrund der Cache-Aktualisierung kann es ein paar Minuten dauern, bis neue Einsendungen erscheinen. Drücke Shift+Neu laden, um die neuesten Einsendungen zu sehen.</small></p><a href="${responseLink}" class="response-link">Zu den Einsendungen</a>`
+                    : `<p>Thank you for your submission!</p><p><small>Due to cache updates, it may take a few minutes for new responses to appear. Press Shift+Reload to see the latest responses.</small></p><a href="${responseLink}" class="response-link">View submissions</a>`;
             }
         } else {
             formMessage.classList.add('error');

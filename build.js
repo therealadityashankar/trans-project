@@ -2,42 +2,24 @@
 const fs = require('fs');
 const path = require('path');
 
-// Import render functions (duplicated here for Node.js compatibility)
-function escapeHtml(str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
+async function build() {
+  // Dynamic import of ESM module
+  const { escapeHtml, renderFeedCard, renderResponses, renderIndexHtml } = await import('./worker/src/render.js');
 
-function renderFeedCard(item) {
-  const created = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
-  const firstImage = item.images && item.images[0] ? item.images[0] : null;
-  const text = (item.message || '').substring(0, 150);
-  const itemJson = JSON.stringify(item).replace(/'/g, '&apos;');
+  const templatePath = path.join(__dirname, 'pre-index.html');
+  const outputPath = path.join(__dirname, 'index.html');
 
-  return `
-<div class="feed-card" data-item='${itemJson}'>
-    ${firstImage ? `<img class="card-image" src="${escapeHtml(firstImage)}" alt="">` : '<div class="card-image"></div>'}
-    <div class="card-content">
-        <div class="card-meta">${escapeHtml(created)}</div>
-        <div class="card-text">${escapeHtml(text)}</div>
-    </div>
-</div>`;
-}
-
-function renderResponses(items) {
-  if (!items.length) {
-    return '<div class="response-empty">Noch keine Einsendungen.</div>';
+  if (!fs.existsSync(templatePath)) {
+    console.error('Error: pre-index.html not found');
+    process.exit(1);
   }
-  return items.map(renderFeedCard).join('\n');
-}
 
-function renderIndexHtml(template, items) {
-  const renderedResponses = renderResponses(items);
-  return template.replace('<!-- RESPONSES_PLACEHOLDER -->', renderedResponses);
+  const template = fs.readFileSync(templatePath, 'utf8');
+  const responses = getLocalResponses();
+  const output = renderIndexHtml(template, responses);
+  fs.writeFileSync(outputPath, output, 'utf8');
+
+  console.log(`Built index.html with ${responses.length} responses`);
 }
 
 function getLocalResponses() {
@@ -84,24 +66,7 @@ function getLocalResponses() {
   return responses;
 }
 
-function build() {
-  const templatePath = path.join(__dirname, 'pre-index.html');
-  const outputPath = path.join(__dirname, 'index.html');
-
-  if (!fs.existsSync(templatePath)) {
-    console.error('Error: pre-index.html not found');
-    process.exit(1);
-  }
-
-  const template = fs.readFileSync(templatePath, 'utf8');
-  const responses = getLocalResponses();
-  const output = renderIndexHtml(template, responses);
-  fs.writeFileSync(outputPath, output, 'utf8');
-
-  console.log(`Built index.html with ${responses.length} responses`);
-}
-
-// Run if called directly
-if (require.main === module) {
-  build();
-}
+build().catch(err => {
+  console.error(err);
+  process.exit(1);
+});
