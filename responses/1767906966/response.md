@@ -1,0 +1,4 @@
+Man sollte meinen, dass meine Auseinandersetzung mit Queerness und Identität aufgrund meiner Transidentität schon früh begonnen hat. 
+Ich hatte jedoch das große Glück in einer Familie aufzuwachsen, in der ich schon immer sein konnte wer ich sein wollte und so konnte ich eine glückliche und unbeschwerte Kindheit führen. 
+Meine Kindheit war queer, bunt und laut, auch wenn ich es damals noch nicht wusste. Aber vor allem war sie glücklich.
+Ich möchte allen queeren Menschen, allen Eltern und allen Kindern Mut machen. Queerness ist nicht einfach, manchmal verdammt beschissen, manchmal frustrierend, traurig und wütend, aber sie ist auch wunderschön und glücklich und bunt, wenn man nur den Mut hat sie zu leben.
