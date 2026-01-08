@@ -122,6 +122,8 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
 
     // Add response.md file
     const mdContent = message;
+    const encoder = new TextEncoder();
+    const mdContentBase64 = btoa(String.fromCharCode(...encoder.encode(mdContent)));
     const mdResp = await fetch(
       `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/responses/${timestamp}/response.md`,
       {
@@ -129,7 +131,7 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
         headers,
         body: JSON.stringify({
           message: `Add response ${timestamp}`,
-          content: btoa(mdContent),
+          content: mdContentBase64,
         }),
       }
     );
