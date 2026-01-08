@@ -18,11 +18,22 @@ body {
 }
 
 .sidebar {
-    display: none;
+    width: 220px;
+    padding: 24px 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 50;
 }
 
 .app {
-    padding-left: 0;
+    padding-left: 220px;
 }
 
 .sidebar-nav {
@@ -195,7 +206,7 @@ ion-icon.sidebar-icon.hydrated {
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0;
+    left: 220px;
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: stretch;
@@ -684,6 +695,18 @@ button[type="submit"]:active {
 }
 
 @media (min-width: 601px) {
+    .sidebar {
+        display: none;
+    }
+
+    .app {
+        padding-left: 0;
+    }
+
+    .response-detail {
+        left: 0;
+    }
+
     .header-interpunct-nav {
         display: block;
     }
