@@ -1,1 +1,0 @@
-Als Kind malte ich mit diesem Pinsel immer schwule Fresken an die Holzstreben des Hochbetts in meinem Kinderzimmer.
