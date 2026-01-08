@@ -9,7 +9,7 @@ export default {
 
     const url = new URL(request.url);
 
-    // GET /responses - List all responses from GitHub
+    // GET /responses - List The Stories from GitHub
     if (request.method === 'GET' && url.pathname === '/responses') {
       try {
         const data = await getResponses(env);
