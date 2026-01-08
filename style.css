@@ -634,6 +634,35 @@ button[type="submit"]:active {
 }
 
 @media (max-width: 600px) {
+    .header {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 5px;
+        justify-items: center;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .header-interpunct {
+        display: none;
+    }
+
+    .header-title {
+        font-size: 1.8rem;
+        margin-top: 10px;
+        grid-column: 1 / -1;
+    }
+
+    .trans-flag,
+    .pride-flag {
+        width: 60px;
+        height: 36px;
+    }
+
+    .pride-flag {
+        margin-left: -50px;
+    }
+
     .container {
         padding: 20px 15px;
     }
