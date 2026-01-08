@@ -35,6 +35,8 @@ function escapeHtml(input) {
 
 function showDetail(item) {
     const created = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
+    const timestamp = item.id || '';
+    const meta = created ? `${created} · ${timestamp}` : timestamp;
     const images = (item.images || [])
         .map((imagePath) => {
             return `<img class="detail-image" src="${imagePath}" alt="">`;
@@ -42,7 +44,7 @@ function showDetail(item) {
         .join('');
 
     detailContent.innerHTML = `
-<div class="detail-meta">${escapeHtml(created)}</div>
+<div class="detail-meta">${escapeHtml(meta)}</div>
 <div class="detail-text">${escapeHtml(item.message || '')}</div>
 ${images ? `<div class="detail-images">${images}</div>` : ''}
 `;
