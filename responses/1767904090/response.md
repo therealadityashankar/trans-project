@@ -1,0 +1,3 @@
+Ich habe schon immer Geschichten geschrieben. Fanfictions zu meinen liebsten Büchern und Filmen, aber auch eigene Geschichten. Als weiblich erzogenes Kind hab ich mit 12/13 vor allem eigene Charaktere geschrieben. Starke Figuren mit geschlechtsneutralen Namen die in keine der binären Schubladen gepasst haben.
+
+Erst Jahre später, mit Anfang 20, habe ich verstanden, dass ich nicht einfach coole Figuren schreiben wollte, sondern das aufs Papier gebracht habe, was ich immer gefühlt habe. Mich. Nicht-binär. Echt.
