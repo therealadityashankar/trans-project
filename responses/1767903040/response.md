@@ -1,0 +1,17 @@
+Für mich hat Queerness + Kindheit sehr viel mit Unwissen, Lernen und Chatverläufen zu tun.
+
+CW: kurze Erwähnung von queeren Begriffen als Beleidung (nichts wirklich konkretes) 
+
+Meine erste Erinnerung an irgendwas im Bezug zu queerness ist das hier, leider negativ:
+Es gab eine Phase, in der die Jungs in meiner Klasse Wörter wie "schwul" als Beleidigung verwendeten. Wenn sie sich durch kleine "Kämpfchen" mal berührten, wurde dann immer ganz schnell "no-homo" gerufen (was ich irgendwie damals schon sehr sinnlos fand). Ich hab die Implikationen damals um ehrlich zu sein leider noch gar nicht verstanden. Trotzdem haben sich vor allem Begriffe wie "schwul" oder "lesbisch" wie verbotene Wörter angefühlt...
+
+Der Durchbruch war für mich während Corona-Lockdowns (ich war zu Beginn in der 8. Klasse oder so) als ich das Internet näher erforschte:
+Online Freunde haben mir immer mehr erklärt, meine Denkweise hinterfragt und ich habe immer mehr recherchiert. Ihr könnt euch gar nicht vorstellen, wie begeistert ich mehr gelernt habe. In der Anonymität konnte ich mich entfalten, das war echt schön. Ich war aber trotzdem der festen Überzeugung, das ich persönlich definitiv nicht queer bin... Haha..ha..ha ... well... Aber ich hab mich auch nicht getraut mit jemandem drüber zu reden. Es hat ja nie jemand drüber geredet :(
+
+Es schien aber auch absolut nicht den Raum dafür zu geben (bzgl. erstes Bild):
+Warum darf mein Freund ausgelassen über Physik fachsimpeln, aber sobald ich meine derzeitige obsession (queerness und was ich darüber lerne) auspacke, ist es zu viel? Die Nachricht war nie böse gemeint, aber sie hat mir das Gefühl gegeben, dass das nicht etwas ist, was meine Freunde interessiert und somit habe ich es mir auch nicht wirklich erlaubt, das weiter zu erkunden. Als ich jenem Freund dann irgendwann auf einem Spaziergang erklärt habe, dass ich das Gefühl habe, ich könnte vielleicht aroace sein, war seine Antwort nur "Vielleicht hast du aber einfach noch nicht die richtige Person gefunden!". Sie schienen das alle irgendwie nicht so zu verstehen.
+
+Besonders schön war dann aber queerness in meiner Umgebung zu finden (bzgl. zweites Bild):
+Ein/zwei meiner Freunde/Bekannten machten doch mal ein paar Aussagen, die mich dazu anregten mit ihnen darüber zu chatten. Ich hab mich damals so gefreut, einen Klassenkameraden dabei zu unterstützen, seine sexuelle Orientierung ein paar Jungs aus meiner Klasse zu erklären und klarzumachen, dass da absolut nichts ekliges dran ist. (Insgesamt habe ich danach dann ganz schön vielen Leuten - ob sie's wollten oder nicht - All mein Wissen vorgetragen. (Übrigens immer noch im Glauben ich sei nur ein Ally :'D))
+
+Insgesamt hat uns allen einfach so die Konversation darüber gefehlt. Ich hab irgendwie keine Repräsentation gesehen... Keiner wusste irgendwas. Und wenn ich darüber nachgedacht habe, wurde das schnell in Frage gestellt. Es hat dadurch echt lange gedauert, bis ich mich nicht mehr gefragt habe "Bilde ich mir das alles nur ein? Sind meine Gefühle tatsächlich so? Das kann doch gar nicht sein... I'm a fraud!". Es gab nie Feindlichkeit, es waren alle eigentlich recht offen, aber dieses (nicht böse gemeintes) wegschieben und in Frage stellen hat sich dann irgendwie doch nicht so gut angefühlt.
