@@ -1,0 +1,1 @@
+Ich wollte eigentlich nur meine Barbies zum verkaufen fotografieren... xD
