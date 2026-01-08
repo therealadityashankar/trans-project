@@ -9,8 +9,6 @@ export function escapeHtml(str) {
 
 export function renderFeedCard(item) {
   const created = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
-  const timestamp = item.id || '';
-  const meta = created ? `${created} · ${timestamp}` : timestamp;
   const firstImage = item.images && item.images[0] ? item.images[0] : null;
   const text = (item.message || '').substring(0, 150);
   const itemJson = JSON.stringify(item).replace(/'/g, '&apos;');
@@ -19,7 +17,7 @@ export function renderFeedCard(item) {
 <div class="feed-card" data-item='${itemJson}'>
     ${firstImage ? `<img class="card-image" src="${escapeHtml(firstImage)}" alt="">` : '<div class="card-image"></div>'}
     <div class="card-content">
-        <div class="card-meta">${escapeHtml(meta)}</div>
+        <div class="card-meta">${escapeHtml(created)}</div>
         <div class="card-text">${escapeHtml(text)}</div>
     </div>
 </div>`;

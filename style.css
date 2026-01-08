@@ -274,6 +274,13 @@ body {
     border-radius: 10px;
 }
 
+.detail-timestamp {
+    font-size: 10px;
+    color: #bbb;
+    margin-top: 20px;
+    text-align: left;
+}
+
 .response-loading,
 .response-empty {
     color: #666;
