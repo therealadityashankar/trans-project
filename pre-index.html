@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queerness & Kindheit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=The+Girl+Next+Door&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="language-toggle">
+        <a id="lang-toggle" href="?lang=en" class="lang-btn">EN</a>
+    </div>
+
+    <div class="app">
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="index.html" class="sidebar-link active" id="nav-all">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/outline/chat-bubble-bottom-center-text.svg" alt="Chat" class="sidebar-icon sidebar-icon-outline">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/solid/chat-bubble-bottom-center-text.svg" alt="Chat" class="sidebar-icon sidebar-icon-filled hidden">
+                    <span>All responses</span>
+                </a>
+                <a href="post.html" class="sidebar-link" id="nav-post">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/outline/pencil-square.svg" alt="Edit" class="sidebar-icon sidebar-icon-outline">
+                    <img src="https://unpkg.com/heroicons@2.0.18/24/solid/pencil-square.svg" alt="Edit" class="sidebar-icon sidebar-icon-filled hidden">
+                    <span>Post your response</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="container">
+            <header class="header">
+                <div class="trans-flag">
+                    <div class="stripe blue"></div>
+                    <div class="stripe pink"></div>
+                    <div class="stripe white"></div>
+                    <div class="stripe pink"></div>
+                    <div class="stripe blue"></div>
+                </div>
+                <div class="pride-flag" aria-label="Rainbow pride flag" role="img">
+                    <div class="stripe red"></div>
+                    <div class="stripe orange"></div>
+                    <div class="stripe yellow"></div>
+                    <div class="stripe green"></div>
+                    <div class="stripe blue"></div>
+                    <div class="stripe purple"></div>
+                </div>
+                <div class="photo-placeholder">
+                    <span>📷</span>
+                </div>
+            </header>
+
+            <main class="content">
+                <section class="feed">
+                    <div id="responses-list" class="feed-list"><!-- RESPONSES_PLACEHOLDER --></div>
+                    <div id="response-detail" class="response-detail hidden">
+                        <div class="detail-container">
+                            <button class="detail-back detail-back-desktop" id="close-detail-desktop">
+                                <span>←</span> <span data-lang="de">Alle Antworten</span><span data-lang="en" hidden>All responses</span>
+                            </button>
+                            <div id="detail-content"></div>
+                            <button class="detail-back detail-back-mobile" id="close-detail-mobile">
+                                <span>←</span> <span data-lang="de">Alle Antworten</span><span data-lang="en" hidden>All responses</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="site-footer">
+                <p>Contact for questions or feedback: <a href="mailto:me@river.berlin">me@river.berlin</a></p>
+                <p>Idea and text: Lilo &nbsp;&middot;&nbsp; Website and design: River</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script-responses.js"></script>
+</body>
+</html>

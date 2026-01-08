@@ -1,7 +1,3 @@
-// Cloudflare Worker URL
-const SUBMISSION_URL = 'https://email-forwarder.theadityashankar.workers.dev';
-const RESPONSES_URL = `${SUBMISSION_URL}/responses`;
-
 const params = new URLSearchParams(window.location.search);
 
 function getLang() {
@@ -26,7 +22,6 @@ function applyLang(lang) {
     }
 }
 
-const feedList = document.getElementById('responses-list');
 const responseDetail = document.getElementById('response-detail');
 const detailContent = document.getElementById('detail-content');
 const closeDetailDesktop = document.getElementById('close-detail-desktop');
@@ -36,44 +31,6 @@ function escapeHtml(input) {
     const div = document.createElement('div');
     div.textContent = input;
     return div.innerHTML;
-}
-
-function renderFeed(items) {
-    if (!feedList) return;
-
-    if (!items.length) {
-        feedList.innerHTML = `<div class="response-empty">${getLang() === 'de' ? 'Noch keine Einsendungen.' : 'No responses yet.'}</div>`;
-        return;
-    }
-
-    feedList.innerHTML = items
-        .map((item, index) => {
-            const created = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
-            const firstImage = item.images && item.images[0] ? item.images[0] : null;
-            const text = (item.message || '').substring(0, 150);
-
-            return `
-<div class="feed-card" data-index="${index}" data-item='${JSON.stringify(item).replace(/'/g, "&apos;")}'>
-    ${firstImage ? `<img class="card-image" src="${firstImage}" alt="">` : '<div class="card-image"></div>'}
-    <div class="card-content">
-        <div class="card-meta">${escapeHtml(created)}</div>
-        <div class="card-text">${escapeHtml(text)}</div>
-    </div>
-</div>`;
-        })
-        .join('');
-
-    // Add click handlers
-    document.querySelectorAll('.feed-card').forEach((card) => {
-        card.addEventListener('click', () => {
-            try {
-                const itemData = JSON.parse(card.dataset.item.replace(/&apos;/g, "'"));
-                showDetail(itemData);
-            } catch (e) {
-                console.error('Error parsing item data:', e);
-            }
-        });
-    });
 }
 
 function showDetail(item) {
@@ -97,23 +54,17 @@ function closeDetail() {
     responseDetail.classList.add('hidden');
 }
 
-async function loadResponses() {
-    if (!feedList) return;
-    feedList.innerHTML = `<div class="response-loading">${getLang() === 'de' ? 'Lade…' : 'Loading…'}</div>`;
-
-    try {
-        const resp = await fetch(RESPONSES_URL);
-        if (!resp.ok) {
-            feedList.innerHTML = `<div class="response-empty">${getLang() === 'de' ? 'Konnte Einsendungen nicht laden.' : 'Could not load responses.'}</div>`;
-            return;
-        }
-
-        const data = await resp.json();
-        renderFeed(Array.isArray(data.items) ? data.items : []);
-    } catch (e) {
-        console.error('Error loading responses:', e);
-        feedList.innerHTML = `<div class="response-empty">${getLang() === 'de' ? 'Konnte Einsendungen nicht laden.' : 'Could not load responses.'}</div>`;
-    }
+function setupCardClickHandlers() {
+    document.querySelectorAll('.feed-card').forEach((card) => {
+        card.addEventListener('click', () => {
+            try {
+                const itemData = JSON.parse(card.dataset.item.replace(/&apos;/g, "'"));
+                showDetail(itemData);
+            } catch (e) {
+                console.error('Error parsing item data:', e);
+            }
+        });
+    });
 }
 
 // Close detail when clicking close buttons or outside
@@ -127,9 +78,8 @@ responseDetail.addEventListener('click', (e) => {
 
 // Initial state
 applyLang(getLang());
-loadResponses();
+setupCardClickHandlers();
 
 window.addEventListener('popstate', () => {
     applyLang(getLang());
-    loadResponses();
 });

@@ -1,3 +1,5 @@
+import { renderIndexHtml } from './render.js';
+
 export async function getResponses(env) {
   const GITHUB_TOKEN = env.GITHUB_TOKEN;
   const GITHUB_REPO = env.GITHUB_REPO;
@@ -183,8 +185,71 @@ export async function updateGithub(env, { message, files, lang, createdAt }) {
       imageUrls.push(`https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${GITHUB_REPO}@main/responses/${timestamp}/${fileName}`);
     }
 
+    // Rebuild index.html with all responses
+    await rebuildIndexHtml(env, headers);
+
     return { timestamp, imageUrls };
   } catch (error) {
     throw new Error(`GitHub update failed: ${error.message}`);
+  }
+}
+
+async function rebuildIndexHtml(env, headers) {
+  const GITHUB_OWNER = env.GITHUB_OWNER;
+  const GITHUB_REPO = env.GITHUB_REPO;
+
+  // Fetch pre-index.html template
+  const templateUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/pre-index.html`;
+  const templateResp = await fetch(templateUrl, { headers });
+  if (!templateResp.ok) {
+    throw new Error(`Failed to fetch pre-index.html: ${templateResp.status}`);
+  }
+  const templateData = await templateResp.json();
+  const template = atob(templateData.content);
+
+  // Fetch all responses
+  const { items } = await getResponses(env);
+
+  // Convert download URLs to jsdelivr URLs for pre-rendered content
+  const itemsWithJsdelivr = items.map(item => ({
+    ...item,
+    images: item.images.map(url => {
+      // Convert raw.githubusercontent.com URL to jsdelivr
+      const match = url.match(/responses\/(\d+)\/(image\d+\.\w+)/);
+      if (match) {
+        return `https://cdn.jsdelivr.net/gh/${GITHUB_OWNER}/${GITHUB_REPO}@main/responses/${match[1]}/${match[2]}`;
+      }
+      return url;
+    }),
+  }));
+
+  // Render the new index.html
+  const newIndexHtml = renderIndexHtml(template, itemsWithJsdelivr);
+
+  // Get current index.html sha (if it exists)
+  const indexUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/index.html`;
+  const indexResp = await fetch(indexUrl, { headers });
+  let indexSha = null;
+  if (indexResp.ok) {
+    const indexData = await indexResp.json();
+    indexSha = indexData.sha;
+  }
+
+  // Commit the new index.html
+  const encoder = new TextEncoder();
+  const indexBase64 = btoa(String.fromCharCode(...encoder.encode(newIndexHtml)));
+  const commitResp = await fetch(indexUrl, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify({
+      message: 'Rebuild index.html with latest responses',
+      content: indexBase64,
+      sha: indexSha,
+    }),
+  });
+
+  if (!commitResp.ok) {
+    const text = await commitResp.text();
+    throw new Error(`Failed to commit index.html: ${commitResp.status} - ${text}`);
   }
 }
