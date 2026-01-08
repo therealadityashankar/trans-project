@@ -1,0 +1,8 @@
+Meine Familie kommt vom Dorf in Bayern & erfüllt viele Stereotype über Dorfmenschen bzw. Bayer*innen, zB dass mein Vater großer Bayern München Fan ist. So sehr, dass wir Stifte mit deren Songs & Kleidung mit ihren Logos hatten. 
+
+Ich wusste eigentlich immer, dass ich Frauen - damals Mädchen - mag - seit dem Kindergarten. Aber seit etwa genauso lange wusste ich, dass ich das niemanden sagen darf. Queere Vorbilder gab es keine. Nicht einmal das Wort kannte ich bis ich 14 war. Selbst mehr verbreitete Wörter wie schwul wurden nicht genutzt. Es hieß immer: “die sind vom andern Ufer.” Was damit gemeint war, wusste klein Ich natürlich nicht. Jemand der “vom anderen Ufer war”, war mein Großonkel. Er hatte sich von seiner Frau scheiden lassen & - so sehr das in einem 1 Tausend Menschen Dorf möglich ist - als schwul geoutet. In meiner Familie wurde das Tod geschwiegen. Wenn er zu Wort kam, war er der, der die Familie “kaputt” gemacht hat. Neben beiläufigen queerfeindlichen Bemerkungen war das das Umfeld, in dem ich aufwuchs. Als ich mit 12 meine erste queere Person per Internet kennenlernte, war mit direkt klar so bin ich auch. 
+Was es mir wohl alles erspart hätte, wenn das früher passiert wäre? 
+Ein dutzend hetero Beziehungen, in die ich mich gezwungen habe, weil ich dachte ich muss - trotz andauerndem Übelkeitsgefühl in Anwesenheit meines “Freundes”.
+Die endlosen Grübelschleifen, ob etwas mit mir nicht stimmt & ich einfach nicht lieben kann. 
+Sehr, sehr viel Einsamkeit!
+Viel Scham run um meine Gefühle für Mädchen.
