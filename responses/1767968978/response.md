@@ -1,0 +1,10 @@
+Ich bin in einem kleinen bayrischen Dorf aufgewachsen, wo Queerness praktisch unsichtbar war, und einer wohlhabenden Familie, in der Abweichungen zum vermeintlich "Normalen" unerwünscht waren. Das Thema Queerness existierte entweder gar nicht, oder mit ein Unterton von "die, die so anders sind", als etwas auf das herabgeblickt wurde. 
+
+Es wurde tuschelnd gemunkelt, ob xy nicht vielleicht schwul sei. In der Schule war es eine Beleidigung und ein Grund bzw. eine Begründung gemobbt oder ausgeschlossen zu werden, wenn andere dachten, man sei schwul oder lesbisch (egal, ob das tatsächlich so war oder nicht). Dass es auch bi+ sexuelle Orientierungen gibt, war sowieso gar kein Thema. 
+
+Ich erinnere mich an einen Moment als Kind mit meiner Oma, meiner Tante und meiner Mutter, als eine von ihnen sagte, dass wenn ich einen Mann date und es von ihm keine Kinderfotos gibt, dass ich dann ja vorsichtig sein müsse, weil es dann sein könnte, dass die Person früher eine Frau war. Ich erinnere mich nicht mehr an den genauen Wortlaut oder worum es eigentlich ging. Aber ich erinnere mich genau an das Gefühl, das bei mir ankam. "Solche Menschen sind gefährlich, da musst du aufpassen, von denen musst du dich fernhalten". 
+Ich kannte, bis ich mich selbst als trans* geoutet und nach Trans* Spaces gesucht habe, keine einzige Trans* Person, geschweige denn jemand nicht-binäres. Es wurde immer subtil vermittelt: "bei uns gibt es sowas nicht, solche Menschen sind am Rande der Gesellschaft". 
+
+Wahrscheinlich habe ich deshalb meine eigene Queerness so sehr verdrängt, dass mich die Erkenntnis erst mit 25 Jahren, als ich komplett weg von jeglicher Familie und dem altem Umfeld gezogen bin, mit voller Wucht getroffen hat. Und das, obwohl ich schon als 11-jähriges "Mädchen" in mein Tagebuch geschrieben habe, dass ich in meine beste Freundin verliebt bin.... 
+
+Heute bin ich endlich offen die Person, die ich innerlich schon immer war. Queere Repräsentation in den sozialen Medien hat mir so sehr dabei geholfen, zu mir selbst zu finden und zu der Person zu werden, die ich jetzt bin.
