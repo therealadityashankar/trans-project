@@ -1,0 +1,1 @@
+Im Corona Lockdown mit 16/17 habe ich mich zum ersten Mal so wirklich mit meiner Sexualität beschäftigt. Davor hatte ich das immer verdrängt, weil ich ja auch so gar nicht queer „aussah“ 🫠
