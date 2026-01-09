@@ -1,0 +1,1 @@
+Der erste Gedanke zu Heteronormativität wurde gesäht :))
