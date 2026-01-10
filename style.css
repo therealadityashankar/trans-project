@@ -219,6 +219,49 @@ ion-icon.sidebar-icon.hydrated {
     display: none;
 }
 
+.image-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.image-lightbox.hidden {
+    display: none;
+}
+
+#lightbox-image {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 32px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
 .detail-container {
     background: rgba(255, 255, 255, 0.98);
     border-radius: 12px;
@@ -298,6 +341,12 @@ ion-icon.sidebar-icon.hydrated {
     width: 100%;
     height: auto;
     border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.detail-image:hover {
+    transform: scale(1.02);
 }
 
 .detail-timestamp {

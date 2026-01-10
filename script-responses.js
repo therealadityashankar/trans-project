@@ -35,6 +35,9 @@ const responseDetail = document.getElementById('response-detail');
 const detailContent = document.getElementById('detail-content');
 const closeDetailDesktop = document.getElementById('close-detail-desktop');
 const closeDetailMobile = document.getElementById('close-detail-mobile');
+const imageLightbox = document.getElementById('image-lightbox');
+const lightboxImage = document.getElementById('lightbox-image');
+const closeLightbox = document.getElementById('close-lightbox');
 
 function escapeHtml(input) {
     const div = document.createElement('div');
@@ -74,6 +77,15 @@ function formatTimestamp(isoString) {
     }
 }
 
+function openLightbox(imageSrc) {
+    lightboxImage.src = imageSrc;
+    imageLightbox.classList.remove('hidden');
+}
+
+function closeLightboxModal() {
+    imageLightbox.classList.add('hidden');
+}
+
 function setupCardClickHandlers() {
     document.querySelectorAll('.feed-card').forEach((card) => {
         // Render timestamp in user's local timezone
@@ -94,6 +106,21 @@ function setupCardClickHandlers() {
     });
 }
 
+function setupLightboxHandlers() {
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('detail-image')) {
+            openLightbox(e.target.src);
+        }
+    });
+
+    closeLightbox.addEventListener('click', closeLightboxModal);
+    imageLightbox.addEventListener('click', (e) => {
+        if (e.target === imageLightbox) {
+            closeLightboxModal();
+        }
+    });
+}
+
 // Close detail when clicking close buttons or outside
 closeDetailDesktop.addEventListener('click', closeDetail);
 closeDetailMobile.addEventListener('click', closeDetail);
@@ -106,6 +133,7 @@ responseDetail.addEventListener('click', (e) => {
 // Initial state
 applyLang(getLang());
 setupCardClickHandlers();
+setupLightboxHandlers();
 
 window.addEventListener('popstate', () => {
     applyLang(getLang());
