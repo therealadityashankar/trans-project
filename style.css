@@ -275,7 +275,7 @@ ion-icon.sidebar-icon.hydrated {
 
 #detail-content {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: scroll;
     padding: 32px;
 }
 
@@ -331,15 +331,29 @@ ion-icon.sidebar-icon.hydrated {
 }
 
 .detail-images {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
     margin-top: 20px;
+}
+
+.image-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.image-counter {
+    font-size: 12px;
+    margin: 0;
+    color: #666;
 }
 
 .detail-image {
     width: 100%;
     height: auto;
+    max-width: 200px;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.2s ease;

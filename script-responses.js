@@ -48,9 +48,11 @@ function escapeHtml(input) {
 function showDetail(item) {
     const created = item.createdAt ? new Date(item.createdAt).toLocaleString() : '';
     const timestamp = item.id || '';
+    const totalImages = (item.images || []).length;
+    const imageText = getLang() === 'de' ? 'Bild' : 'Image';
     const images = (item.images || [])
-        .map((imagePath) => {
-            return `<img class="detail-image" src="${imagePath}" alt="">`;
+        .map((imagePath, index) => {
+            return `<div class="image-wrapper"><p class="image-counter">${imageText} ${index + 1}/${totalImages}</p><img class="detail-image" src="${imagePath}" alt=""></div>`;
         })
         .join('');
 
