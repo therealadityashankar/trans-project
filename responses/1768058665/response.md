@@ -1,0 +1,1 @@
+hey ich bin lesbisch, hatte als Kind noch keine Ahnung davon, aber habe ganz deutlich in mein Freundebuch rein geschrieben, dass ich küssen und Jungs nicht mag, stellte sich heraus, dass ich küssen sehr wohl mag, aber eben Frauen.
